@@ -9,8 +9,8 @@
    * Flexible
 
 ### Api
-   * 格式化时间
-        -watti.format(date, style);
+   * 格式化时间  
+        - watti.format(date, style);
         
    * 获取指定的时间单位
         - watti.getDaysOfWeek(date, style);     
