@@ -4,7 +4,8 @@ const tool = Object.create(null);
 tool.getSeconds = function (date, style){
     let seconds = date.getSeconds();
     switch (style) {
-        case 'ss' || 'SS':
+        case 'ss':
+        case 'SS':
             if (seconds < 10) {
                 seconds = '0' + seconds.toString()
             }
@@ -18,7 +19,6 @@ tool.getMinutes = function (date, style) {
     let minutes = date.getMinutes();
     switch (style) {
         case 'mm':
-        case 'm':
             if(minutes<10){
                 minutes = '0'+minutes.toString()
             }
@@ -43,6 +43,13 @@ tool.getHours = function (date, style) {
             if(hours>12){
                 hours = hours-12;
             }
+            break;
+        case 'hhh':
+            let label = hours>=18?'晚上':(hours>=12?'下午':(hours>=6?'早上':'凌晨'));
+            if(hours>13){
+                hours -=12;
+            }
+            hours = label + hours.toString();
             break;
         case 'H':
             break;
@@ -92,7 +99,8 @@ tool.getDaysOfWeek = function(date, style){
 tool.getDaysOfMonth = function (date, style) {
     let month = date.getDate();
     switch (style) {
-        case 'dd' || 'DD':
+        case 'dd':
+        case 'DD':
             if (month<10) {
                 month = '0'+month.toString();
             }
@@ -157,10 +165,6 @@ tool.getTimeBasic = function (date) {
         return new Date();
     }
     return new Date(date);
-};
-
-tool.strToArr = function(str){
-
 };
 
 module.exports = tool;

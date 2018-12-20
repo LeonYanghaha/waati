@@ -14,7 +14,7 @@ watti.format = function(date,  style){
         return localDate.toLocaleString()
     }
     let arr = style.split('');
-    const wordReg = /[ymdhs]/i;
+    const wordReg = /[wymdhs]/i;
     const prefectArr = [];
     let prefectArrIndex =-1 ;
     for(let i = 0; i < arr.length; i++){
@@ -54,6 +54,9 @@ watti.format = function(date,  style){
         }
         if(/s/i.test(temp)){
             prefectArr[k] = _.getSeconds(localDate,prefectArr[k]);
+        }
+        if(/w/i.test(temp)){
+            prefectArr[k] = _.getDaysOfWeek(localDate,prefectArr[k]);
         }
     }
     return prefectArr.join('');
@@ -105,6 +108,7 @@ watti.format = function(date,  style){
 /**
  * @describe 获取时间
  * @param {Date} date
+ * @return {Date}
  */
 watti.getTime = function (date) {
     return _.getTimeBasic(date);
@@ -114,6 +118,11 @@ watti.getTime = function (date) {
  * @describe 获取星期
  * @param {Date} date
  * @param {String} style
+ *    w     1,2,3,4...
+ *    ww    一，二，三...
+ *    www   星期一，星期二，星期三...
+ *    WW    Sunday,Monday...
+ *    W     Sun,Mon...
  */
 watti.getDaysOfWeek = function(date, style){
     return _.getDaysOfWeek(_.getTimeBasic(date),style)
@@ -123,6 +132,8 @@ watti.getDaysOfWeek = function(date, style){
  * @describe 获取日期--多少号
  * @param {Date} date
  * @param {String} style
+ *      d/D    1,2,3,.....31
+ *      dd/DD  01,02,03....31
  */
 watti.getDaysOfMonth = function(date, style){
    return _.getDaysOfMonth(_.getTimeBasic(date), style)
@@ -132,6 +143,10 @@ watti.getDaysOfMonth = function(date, style){
  * @describe 获取月份
  * @param {Date} date
  * @param {String} style
+ *       M      1,2,3...
+ *       MM     一，二...
+ *       MMM    January,February...
+ *       MMMM   Jan,Feb...
  */
 watti.getMonth = function(date, style){
     return _.getMonth(_.getTimeBasic(date), style)
@@ -141,6 +156,8 @@ watti.getMonth = function(date, style){
  * @describe 获取年份
  * @param {Date} date
  * @param {String} style
+ *      y/yy/Y/YY           18,19...两位数表示年份
+ *      yyy/YYY/yyyy/YYYYY  2018,2109
  */
 watti.getYear = function (date, style) {
     return _.getYear(_.getTimeBasic(date),style)
@@ -152,6 +169,7 @@ watti.getYear = function (date, style) {
  * @param {String} style
  *     h    1 2 3  ... 12小时计时法
  *     hh   01 02 ...12小时计时法
+ *     hhh
  *     H    1 2 3 ...24小时计时法
  *     HH   01 02 03 ...24小时计时法
  */
@@ -163,6 +181,8 @@ watti.getHours = function (date, style) {
  * @describe  返回分钟数
  * @param {Date} date
  * @param {String} style
+ *      m   1,2,3....59
+ *      mm 01,02...59
  */
 watti.getMinutes = function (date, style) {
     return _.getMinutes(_.getTimeBasic(date),style);
@@ -172,6 +192,8 @@ watti.getMinutes = function (date, style) {
  * @describe  返回秒数
  * @param {Date} date
  * @param {String} style
+ *     s/S   1,2,3...59
+ *     ss/SS 01,02,03....59
  */
 watti.getSeconds = function (date, style) {
     return _.getSeconds(_.getTimeBasic(date), style);
