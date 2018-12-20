@@ -12,7 +12,7 @@
    * 格式化时间  
         - watti.format(date, style);
         
-   * 获取指定的时间单位
+   * 获取指定风格的时间单位
         - watti.getDaysOfWeek(date, style);     
         - watti.getDaysOfMonth(date, style);     
         - watti.getMonth(date, style);     
@@ -56,6 +56,12 @@
         * 秒  
            s/S:         1,2,3...59  
            ss/SS:       01,02,03....59  
+        * 星期
+           w:     1,2,3,4...  
+           ww:    一，二，三...  
+           www:   星期一，星期二，星期三...  
+           WW:    Sunday,Monday...  
+           W:     Sun,Mon...  
 
 ### Demo
     
@@ -64,6 +70,13 @@
     let temp = watti.format(new Date().getTime(), 'M月dd日 周ww HH:mm:SS');
     // 12月20日 周日 13:23:46
 ```
+   * 获取指定风格的时间单位
+```$xslt
+    watti.getDaysOfWeek(1545298077931,'WW');
+    // Thursday
+    watti.getHours(1545298077931,'HH');
+    // 17
+```   
    * 获取时间戳
 ```$xslt
     let timeStamp = watti.getTimeStamp(new Date());
@@ -71,8 +84,8 @@
 ```   
    * 获取时间差描述
 ```$xslt
-    let str = watti.getRange(new Date(),1545290473105);//和指定时间比较
-    // 几分钟前
+    let str = watti.getRange(1545297915241,1545290473105);//和指定时间比较
+    // 几个小时前
     let str = watti.getRangeFromNow(new Date());//和当前时间比较
     // 几秒钟前
 ```   

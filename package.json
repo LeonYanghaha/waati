@@ -1,6 +1,6 @@
 {
   "name": "waati",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A very lightweight time processing library, simple and reliable",
   "main": "index.js",
   "scripts": {
