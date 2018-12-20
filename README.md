@@ -58,7 +58,7 @@
 
 ### Demo
     
-   * 格式化时间
+   * 格式化时间  
 ```$xslt
     let temp = watti.format(new Date().getTime(), 'M月dd日 周ww HH:mm:SS');
     // 12月20日 周日 13:23:46
