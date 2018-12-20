@@ -30,3 +30,10 @@ ___A very lightweight time processing library, simple and reliable___
     #### 秒
         s/S         1,2,3...59
         ss/SS       01,02,03....59        
+
+### Demo
+    
+    ```    
+    let temp = watti.format(new Date().getTime(), 'M月dd日 周ww HH:mm:SS');
+    // 12月20日 周日 13:23:46
+    ```
