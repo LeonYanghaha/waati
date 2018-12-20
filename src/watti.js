@@ -19,8 +19,8 @@ watti.getRangeFromNow = function(date){
  * @return {String}
  */
 watti.getRange = function(date, focusDate){
-     let dateStamp = _.getTimeStamp(date);
-     let focusDateStamp = _.getTimeStamp(focusDate);
+     const dateStamp = _.getTimeStamp(date);
+     const focusDateStamp = _.getTimeStamp(focusDate);
      let tempRange = dateStamp - focusDateStamp ;
      const oneMinutes = 1000*60;
      const tenMinutes = oneMinutes*10;

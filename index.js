@@ -1,5 +1,4 @@
 'use strict';
 
-const watti = require("./src/watti");
-module.exports = watti;
+module.exports = require("./src/watti");
 

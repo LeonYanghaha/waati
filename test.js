@@ -8,8 +8,6 @@ console.log(watti.getTimeStamp(new Date()));
 
 console.log(watti.getRange(new Date(),1545290473105));
 
-
-
 console.log(watti.getRangeFromNow(new  Date ()));
 
 
