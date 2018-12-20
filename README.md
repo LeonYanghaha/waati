@@ -33,7 +33,7 @@ ___A very lightweight time processing library, simple and reliable___
 
 ### Demo
     
-    ```    
+    `  
     let temp = watti.format(new Date().getTime(), 'M月dd日 周ww HH:mm:SS');
     // 12月20日 周日 13:23:46
-    ```
+    `
