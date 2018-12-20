@@ -13,11 +13,50 @@ watti.format = function(date,  style){
     if(!style){
         return localDate.toLocaleString()
     }
-    let formatDate = style;
-
-
-
-
+    let arr = style.split('');
+    const wordReg = /[ymdhs]/i;
+    const prefectArr = [];
+    let prefectArrIndex =-1 ;
+    for(let i = 0; i < arr.length; i++){
+        if (wordReg.test(arr[i])){
+            if(prefectArrIndex===-1){
+                prefectArr.push(arr[i]);
+                prefectArrIndex = prefectArr.length ;
+            }else{
+                prefectArr.push(prefectArr.pop()+arr[i])
+            }
+        }else {
+            prefectArr.push(arr[i]);
+            prefectArrIndex = -1;
+        }
+    }
+    for(let k = 0; k<prefectArr.length; k++) {
+        let temp = prefectArr[k].toString();
+        if(/y/i.test(temp)){
+            prefectArr[k] = _.getYear(localDate,prefectArr[k]);
+            continue;
+        }
+        if (/M/.test(temp)){
+            prefectArr[k] = _.getMonth(localDate,prefectArr[k]);
+            continue;
+        }
+        if (/d/i.test(temp)){
+            prefectArr[k] = _.getDaysOfMonth(localDate,prefectArr[k]);
+            continue;
+        }
+        if (/m/.test(temp)){
+            prefectArr[k] = _.getMinutes(localDate,prefectArr[k]);
+            continue;
+        }
+        if(/h/i.test(temp)){
+            prefectArr[k] = _.getHours(localDate,prefectArr[k]);
+            continue;
+        }
+        if(/s/i.test(temp)){
+            prefectArr[k] = _.getSeconds(localDate,prefectArr[k]);
+        }
+    }
+    return prefectArr.join('');
     /**
      *  感觉这种做法很难处理
      *   1.字符串的长度是发生变化的。
@@ -61,7 +100,6 @@ watti.format = function(date,  style){
     //         }
     //     }
     // }
-    return formatDate;
 };
 
 /**

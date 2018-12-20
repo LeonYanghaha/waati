@@ -17,7 +17,8 @@ tool.getSeconds = function (date, style){
 tool.getMinutes = function (date, style) {
     let minutes = date.getMinutes();
     switch (style) {
-        case 'mm' || 'MM':
+        case 'mm':
+        case 'm':
             if(minutes<10){
                 minutes = '0'+minutes.toString()
             }
