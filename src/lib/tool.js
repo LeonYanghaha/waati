@@ -7,7 +7,7 @@ tool.getSeconds = function (date, style){
         case 'ss':
         case 'SS':
             if (seconds < 10) {
-                seconds = '0' + seconds.toString()
+                seconds = '0' + seconds.toString();
             }
             break;
         default:
@@ -20,7 +20,7 @@ tool.getMinutes = function (date, style) {
     switch (style) {
         case 'mm':
             if(minutes<10){
-                minutes = '0'+minutes.toString()
+                minutes = '0'+minutes.toString();
             }
             break;
         default:
@@ -33,7 +33,7 @@ tool.getHours = function (date, style) {
     switch (style) {
         case 'h':
             if(hours>12){
-                hours = hours-12;
+                hours = hours - 12;
             }
             break;
         case 'hh':
@@ -47,7 +47,7 @@ tool.getHours = function (date, style) {
         case 'hhh':
             let label = hours>=18?'晚上':(hours>=12?'下午':(hours>=6?'早上':'凌晨'));
             if(hours>13){
-                hours -=12;
+                hours -= 12;
             }
             hours = label + hours.toString();
             break;
@@ -165,6 +165,10 @@ tool.getTimeBasic = function (date) {
         return new Date();
     }
     return new Date(date);
+};
+
+tool.getTimeStamp = function(date){
+    return tool.getTimeBasic(date).getTime();
 };
 
 module.exports = tool;
