@@ -3,6 +3,59 @@ const _  = require("./lib/tool");
 const watti = Object.create(null);
 
 /**
+ * @describe  字符串转成日期格式
+ * @param {String}  dateStr
+ * @param {String}  style
+ * @return {Date}   如果有参数为空，则返回null
+ */
+watti.strToDate = function(dateStr,style){
+    console.error(dateStr,'--',style);
+    if(!dateStr || !style){
+        return null;
+    }
+    let prefectArr = _.styleToArr(style);
+    let indexArr = [];
+    let dateSymbolArr = [];
+    let start = 0 ;
+    for(let i = 0; i<prefectArr.length; i++ ){
+        let tempStr = prefectArr[i];
+        if(!/[wymdhs]/i.test(tempStr)){// 进入这个if的，都是特殊符号了
+            let tempIndex = dateStr.indexOf(tempStr,start);
+            // TODO   如果 tempIndex =-1 怎么办
+            indexArr.push([start, tempIndex]);
+            start = tempIndex + tempStr.length;
+        }else{
+            dateSymbolArr.push(tempStr);
+        }
+    }
+    // TODO  这里需要做判断
+    indexArr.push([start, dateStr.length]);
+    let date = new Date(0);
+    console.log(dateSymbolArr);
+    for(let k = 0; k<indexArr.length; k++){
+        let startIndex = indexArr[k][0];
+        let endIndex = indexArr[k][1];
+        let strFromDateStr = dateStr.slice(startIndex, endIndex);
+        if(/y/i.test(dateSymbolArr[k])){
+            date.setFullYear(parseInt(strFromDateStr)<100?parseInt(strFromDateStr)+2000:parseInt(strFromDateStr));
+        }
+        if(/M/.test(dateSymbolArr[k])){
+            date.setMonth(_.getMonthFromSymbol(strFromDateStr, dateSymbolArr[k]));
+        }
+        if(/m/.test(dateSymbolArr[k])){
+            date.setMinutes(parseInt(strFromDateStr));
+        }
+        if(/s/i.test(dateSymbolArr[k])){
+            date.setSeconds(parseInt(strFromDateStr));
+        }
+        if(/h/i.test(dateSymbolArr[k])){
+            date.setHours(parseInt(strFromDateStr));
+        }
+    }
+    console.log(date.toLocaleString());
+};
+
+/**
  * @describe 返回当前时间和传入时间差的描述，比如几分钟前  几个小时之前...
  *           最终还是调用了getRange(date, focusDate)方法
  * @param {Date} date 时间，
@@ -88,23 +141,8 @@ watti.format = function(date,  style){
     if(!style){
         return localDate.toLocaleString();
     }
-    let arr = style.split('');
-    const wordReg = /[wymdhs]/i;
-    const prefectArr = [];
-    let prefectArrIndex = -1;
-    for(let i = 0; i < arr.length; i++){
-        if (wordReg.test(arr[i])){
-            if(prefectArrIndex===-1){
-                prefectArr.push(arr[i]);
-                prefectArrIndex = prefectArr.length;
-            }else{
-                prefectArr.push(prefectArr.pop() + arr[i]);
-            }
-        }else {
-            prefectArr.push(arr[i]);
-            prefectArrIndex = -1;
-        }
-    }
+    let prefectArr = _.styleToArr(style);
+
     for(let k = 0; k<prefectArr.length; k++) {
         let temp = prefectArr[k].toString();
         if(/y/i.test(temp)){

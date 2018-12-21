@@ -1,6 +1,6 @@
 {
   "name": "waati",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A very lightweight time processing library, simple and reliable",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/Yangk030208/waati.git"
   },
-  "keywords": ["time", "date","format","parsex"],
+  "keywords": ["time", "date","format"],
   "author": "yangkai030208@163.com",
   "license": "ISC",
   "bugs": {

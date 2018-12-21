@@ -1,6 +1,32 @@
 'use strict';
 const tool = Object.create(null);
 
+tool.styleToArr = function(style){
+    let arr = style.split('');
+    const wordReg = /[wymdhs]/i;
+    const prefectArr = [];
+    let isSameFlag = -1;  // 0 -> str     1->other   -1->init value
+    for(let i = 0; i < arr.length; i++){
+        let tempVal = arr[i];
+        if (wordReg.test(tempVal)){
+            if(isSameFlag === 1  || isSameFlag === -1){
+                prefectArr.push(tempVal);
+            }else{
+                prefectArr.push(prefectArr.pop() + tempVal);
+            }
+            isSameFlag = 0;
+        }else {
+            if(isSameFlag === 0 || isSameFlag===-1){
+                prefectArr.push(tempVal);
+            }else{
+                prefectArr.push(prefectArr.pop() + tempVal);
+            }
+            isSameFlag = 1;
+        }
+    }
+    return prefectArr;
+};
+
 tool.getSeconds = function (date, style){
     let seconds = date.getSeconds();
     switch (style) {
@@ -169,6 +195,47 @@ tool.getTimeBasic = function (date) {
 
 tool.getTimeStamp = function(date){
     return tool.getTimeBasic(date).getTime();
+};
+
+
+tool.getMonthFromSymbol = function(str, style){
+    const monthDict = [
+        [ 1,'一','January','Jan'],
+        [ 2,'二','February','Feb'],
+        [ 3,'三','March','Mar'],
+        [ 4,'四','April','Apr'],
+        [ 5,'五','May','May'],
+        [ 6,'六','June','Jun'],
+        [ 7,'七','July','Jul'],
+        [ 8,'八','August','Aug'],
+        [ 9,'九','September','Sept'],
+        [ 10,'十','October','Oct'],
+        [ 11,'十一','November','Nov'],
+        [ 12,'十二','December','Dec']
+    ];
+    let index = 1;
+    switch (style) {
+        case 'M':
+            index = 0;
+            break;
+        case 'MM':
+            index = 1;
+            break;
+        case 'MMM':
+            index = 2;
+            break;
+        case 'MMMMM':
+            index = 3;
+            break;
+    }
+    let month = -1;
+    for(let i = 0; i<=11; i++){
+        if(str == monthDict[i][index]){
+            month = monthDict[i][0];
+            break;
+        }
+    }
+    return month;
 };
 
 module.exports = tool;
