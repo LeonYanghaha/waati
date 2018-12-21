@@ -27,7 +27,7 @@
    * 从字符串解析日期
         - watti.strToDate(string,style); 
         - ___notes: 解析日期的时候，以new Date(0)为模板去解析日期并赋值，如果没有解析到某个值，则以new Date(0)的对应值为默认值。___
-        - ___比如：传入了 ('2-2 12:23:12','M-d H:m:s'), 则返回：1970-02-02T12:23:12.000Z___
+        - ___比如：传入了 ('2-2 12: 23:12','M-d H: m:s'), 则返回：1970-02-02T12:23:12.000Z___
         
    * 获取时间差描述
         - watti.getRange(date，date);           
@@ -89,7 +89,7 @@
 ```  
    * 从字符串解析日期
 ```$xslt
-    let date = watti.strToDate('=2 月21 日  - 周五 01:26:33zz 2017--','=M 月dd 日  - 周ww HH:mm:SSzz yyy--');
+    let date = watti.strToDate('=2 月21 日-周五 01:26:33zz 2017--','=M 月dd 日-周ww HH:mm:SSzz yyy--');
     // Date 对象
 ```   
    * 获取时间差描述

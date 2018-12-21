@@ -26,7 +26,7 @@ const watti  = require("./index");
 
 
 // arr = ['=2 月21 日  - 周五 01:26:33zz 2017--','=M 月dd 日  - 周ww HH:mm:SSzz yyy--'];
-arr = ['2-2 12:23:12','M-d H:m:s'];
+arr = ['2-2 12: 23:12','M-d H: m:s'];
 console.log('输入：', arr);
 console.log(watti.strToDate(arr[0],arr[1]));
 console.log('----------------------------');
