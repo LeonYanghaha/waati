@@ -1,6 +1,12 @@
 'use strict';
 const tool = Object.create(null);
 
+
+/**
+ * @describe 将style转成数组
+ * @param {String} style
+ * @return {Array}
+ */
 tool.styleToArr = function(style){
     let arr = style.split('');
     const wordReg = /[wymdhs]/i;
@@ -27,6 +33,12 @@ tool.styleToArr = function(style){
     return prefectArr;
 };
 
+/**
+ * @describe 返回秒数
+ * @param {Date} date
+ * @param {String} style
+ * @return {String}
+ */
 tool.getSeconds = function (date, style){
     let seconds = date.getSeconds();
     switch (style) {
@@ -41,6 +53,12 @@ tool.getSeconds = function (date, style){
     return seconds;
 };
 
+/**
+ * @describe 返回分钟
+ * @param {Date} date
+ * @param {String} style
+ * @return {String}
+ */
 tool.getMinutes = function (date, style) {
     let minutes = date.getMinutes();
     switch (style) {
@@ -54,6 +72,12 @@ tool.getMinutes = function (date, style) {
     return minutes;
 };
 
+/**
+ * @describe 返回小时数
+ * @param {Date} date
+ * @param {String} style
+ * @return {String}
+ */
 tool.getHours = function (date, style) {
     let hours = date.getHours(); // 0  1 2 3 4 5 6 7 .....
     switch (style) {
@@ -89,6 +113,12 @@ tool.getHours = function (date, style) {
     return hours;
 };
 
+/**
+ * @describe 返回星期
+ * @param {Date} date
+ * @param {String} style
+ * @return {String}
+ */
 tool.getDaysOfWeek = function(date, style){
     let day = date.getDay();
     const weekDict = [
@@ -122,6 +152,12 @@ tool.getDaysOfWeek = function(date, style){
     return day;
 };
 
+/**
+ * @describe 返回日期，几号
+ * @param {Date} date
+ * @param {String} style
+ * @return {Number}
+ */
 tool.getDaysOfMonth = function (date, style) {
     let month = date.getDate();
     switch (style) {
@@ -136,6 +172,12 @@ tool.getDaysOfMonth = function (date, style) {
     return month;
 };
 
+/**
+ * @describe 返回月份
+ * @param {Date} date
+ * @param {String} style
+ * @return {String}
+ */
 tool.getMonth = function (date, style) {
     let month = date.getMonth();
     const monthDict = [
@@ -172,6 +214,12 @@ tool.getMonth = function (date, style) {
     return month;
 };
 
+/**
+ * @describe 获取年份
+ * @param {Date} date
+ * @param {String} style
+ * @return {Number}
+ */
 tool.getYear = function (date, style) {
     let year = date.getFullYear();
     switch (style) {
@@ -186,6 +234,11 @@ tool.getYear = function (date, style) {
     return year;
 };
 
+/**
+ * @describe 将传入的字符串/数字...转成统一格式的Date对象
+ * @param {Object} date
+ * @return {Date}
+ */
 tool.getTimeBasic = function (date) {
     if(!date){
         return new Date();
@@ -193,11 +246,21 @@ tool.getTimeBasic = function (date) {
     return new Date(date);
 };
 
+/**
+ * @describe  获取时间戳
+ * @param {Date} date
+ * @return {number}
+ */
 tool.getTimeStamp = function(date){
     return tool.getTimeBasic(date).getTime();
 };
 
-
+/**
+ * @describe  将月份的各种表达转成0，1，2..11
+ * @param {String} str
+ * @param {String} style
+ * @return {number}
+ */
 tool.getMonthFromSymbol = function(str, style){
     const monthDict = [
         [ 1,'一','January','Jan'],
@@ -230,7 +293,7 @@ tool.getMonthFromSymbol = function(str, style){
     }
     let month = -1;
     for(let i = 0; i<=11; i++){
-        if(str == monthDict[i][index]){
+        if(String(str) === String(monthDict[i][index])){
             month = monthDict[i][0]-1;
             break;
         }

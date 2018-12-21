@@ -24,6 +24,7 @@ watti.strToDate = function(dateStr,style){
             // TODO   如果 tempIndex =-1 怎么办，发生这种情况的原因是：日期模板和实际传入的日期格式不一致导致的
             if(tempIndex===-1){
                 console.error('error......Value is illegal');
+                console.error('error......Value is illegal');
                 isErrorFlag = true;
                 break;
             }
@@ -296,6 +297,7 @@ watti.getMinutes = function (date, style) {
 watti.getSeconds = function (date, style) {
     return _.getSeconds(_.getTimeBasic(date), style);
 };
+
 /**
  * @describe  返回时间戳
  * @param {Date} date
