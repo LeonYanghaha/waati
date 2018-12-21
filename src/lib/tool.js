@@ -231,7 +231,7 @@ tool.getMonthFromSymbol = function(str, style){
     let month = -1;
     for(let i = 0; i<=11; i++){
         if(str == monthDict[i][index]){
-            month = monthDict[i][0];
+            month = monthDict[i][0]-1;
             break;
         }
     }

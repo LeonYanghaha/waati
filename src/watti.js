@@ -9,7 +9,6 @@ const watti = Object.create(null);
  * @return {Date}   如果有参数为空，则返回null
  */
 watti.strToDate = function(dateStr,style){
-    console.error(dateStr,'--',style);
     if(!dateStr || !style){
         return null;
     }
@@ -17,42 +16,63 @@ watti.strToDate = function(dateStr,style){
     let indexArr = [];
     let dateSymbolArr = [];
     let start = 0 ;
+    let isErrorFlag = false;
     for(let i = 0; i<prefectArr.length; i++ ){
         let tempStr = prefectArr[i];
-        if(!/[wymdhs]/i.test(tempStr)){// 进入这个if的，都是特殊符号了
+        if(!/[wymdhs]/i.test(tempStr)){ // 进入这个if的，都是特殊符号了
             let tempIndex = dateStr.indexOf(tempStr,start);
-            // TODO   如果 tempIndex =-1 怎么办
-            indexArr.push([start, tempIndex]);
+            // TODO   如果 tempIndex =-1 怎么办，发生这种情况的原因是：日期模板和实际传入的日期格式不一致导致的
+            if(tempIndex===-1){
+                console.error('error......Value is illegal');
+                isErrorFlag = true;
+                break;
+            }
+            if(tempIndex!==0){
+                indexArr.push([start, tempIndex]);
+            }
             start = tempIndex + tempStr.length;
         }else{
             dateSymbolArr.push(tempStr);
         }
     }
+    if(isErrorFlag){
+        return null;
+    }
+    // console.log('dateSymbolArr:',dateSymbolArr);
     // TODO  这里需要做判断
-    indexArr.push([start, dateStr.length]);
+    // if(indexArr[indexArr.length-1][1]<dateStr.length){
+        indexArr.push([start, dateStr.length]);
+    // }
     let date = new Date(0);
-    console.log(dateSymbolArr);
     for(let k = 0; k<indexArr.length; k++){
         let startIndex = indexArr[k][0];
         let endIndex = indexArr[k][1];
         let strFromDateStr = dateStr.slice(startIndex, endIndex);
         if(/y/i.test(dateSymbolArr[k])){
             date.setFullYear(parseInt(strFromDateStr)<100?parseInt(strFromDateStr)+2000:parseInt(strFromDateStr));
+            continue;
         }
         if(/M/.test(dateSymbolArr[k])){
-            date.setMonth(_.getMonthFromSymbol(strFromDateStr, dateSymbolArr[k]));
+            date.setUTCMonth(_.getMonthFromSymbol(strFromDateStr, dateSymbolArr[k]));
+            continue;
         }
         if(/m/.test(dateSymbolArr[k])){
             date.setMinutes(parseInt(strFromDateStr));
+            continue;
         }
         if(/s/i.test(dateSymbolArr[k])){
             date.setSeconds(parseInt(strFromDateStr));
+            continue;
         }
         if(/h/i.test(dateSymbolArr[k])){
-            date.setHours(parseInt(strFromDateStr));
+            date.setUTCHours(parseInt(strFromDateStr));
+            continue;
+        }
+        if (/^[d]/i.test(dateSymbolArr[k])){
+            date.setUTCDate(parseInt(strFromDateStr))
         }
     }
-    console.log(date.toLocaleString());
+    return date;
 };
 
 /**
@@ -153,7 +173,7 @@ watti.format = function(date,  style){
             prefectArr[k] = _.getMonth(localDate, prefectArr[k]);
             continue;
         }
-        if (/d/i.test(temp)){
+        if (/^[d]/i.test(temp)){
             prefectArr[k] = _.getDaysOfMonth(localDate, prefectArr[k]);
             continue;
         }
