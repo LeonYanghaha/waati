@@ -37,7 +37,7 @@ tool.styleToArr = function(style){
  * @describe 返回秒数
  * @param {Date} date
  * @param {String} style
- * @return {String}
+ * @return {Number}
  */
 tool.getSeconds = function (date, style){
     let seconds = date.getSeconds();
@@ -57,7 +57,7 @@ tool.getSeconds = function (date, style){
  * @describe 返回分钟
  * @param {Date} date
  * @param {String} style
- * @return {String}
+ * @return {number}
  */
 tool.getMinutes = function (date, style) {
     let minutes = date.getMinutes();
@@ -76,7 +76,7 @@ tool.getMinutes = function (date, style) {
  * @describe 返回小时数
  * @param {Date} date
  * @param {String} style
- * @return {String}
+ * @return {number}
  */
 tool.getHours = function (date, style) {
     let hours = date.getHours(); // 0  1 2 3 4 5 6 7 .....
