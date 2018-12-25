@@ -24,7 +24,7 @@ tool.styleToArr = function(style){
       if(isSameFlag === 0 || isSameFlag===-1){
         prefectArr.push(tempVal);
       }else{
-          prefectArr.push(prefectArr.pop() + tempVal);
+        prefectArr.push(prefectArr.pop() + tempVal);
       }
       isSameFlag = 1;
     }
@@ -286,7 +286,7 @@ tool.getMonthFromSymbol = function(str, style){
     case 'MMM':
       index = 2;
       break;
-    case 'MMMMM':
+    case 'MMMM':
       index = 3;
       break;
   }
