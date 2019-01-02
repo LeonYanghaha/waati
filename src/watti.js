@@ -230,7 +230,7 @@ watti.getDaysOfWeek = function(date, style){
  * @return {int}
  */
 watti.getDaysOfMonth = function(date, style){
- return _.getDaysOfMonth(_.getTimeBasic(date), style);
+  return _.getDaysOfMonth(_.getTimeBasic(date), style);
 };
 
 /**
