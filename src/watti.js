@@ -15,13 +15,13 @@ watti.strToDate = function(dateStr,style){
   let prefectArr = _.styleToArr(style);
   let indexArr = [];
   let dateSymbolArr = [];
-  let start = 0 ;
+  let start = 0;
   let isErrorFlag = false;
   for(let i = 0; i<prefectArr.length; i++ ){
     let tempStr = prefectArr[i];
     if(!/[wymdhs]/i.test(tempStr)){ // 进入这个if的，都是特殊符号了
       let tempIndex = dateStr.indexOf(tempStr,start);
-      // TODO   如果 tempIndex =-1 怎么办，发生这种情况的原因是：日期模板和实际传入的日期格式不一致导致的
+      // tempIndex ===-1 这种情况的原因是：日期模板和实际传入的日期格式不一致
       if(tempIndex===-1){
         console.error('error......Value is illegal');
         console.error('error......Value is illegal');
